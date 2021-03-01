@@ -1,0 +1,28 @@
+﻿@page
+@model _301_fu.Pages.Shrines.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+@foreach (var item in Model.Shrine)
+{
+    <h4>@item.name</h4>
+    <ul>
+        <li>@Models.Region.options[item.region.labelIdx] Region</li>
+        <li>@Models.Element.options[item.element.labelIdx] type</li>
+    </ul>
+    <div>Available medals:</div>
+    <ul>
+        @foreach(var m in item.medallions)
+        {
+        <li>@Models.Medallion.options[m.labelIdx]</li>
+        }
+    </ul>
+}

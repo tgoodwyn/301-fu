@@ -1,0 +1,70 @@
+﻿@page
+@model _301_fu.Pages.Shrines.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+<br />
+<form method="post">
+    <label asp-for="shrine.name"></label>
+    <input asp-for="shrine.name" />
+    <span asp-validation-for="shrine.name"></span>
+    <br />
+    <br />
+
+    <label for="region">Where is the shrine?</label>
+    <select id="region" name="region.labelIdx">
+        @{
+
+            int len = Models.Region.options.Length;
+            int i = 0;
+            for (i = 0; i < len; i++)
+            {
+                string text = Models.Region.options[i];
+                <option value="@i">@text</option>
+            }
+        }
+    </select>
+
+    <br />
+    <br />
+    <p>What is the element of the shrine?</p>
+    @{
+        len = Models.Element.options.Length;
+        i = 0;
+        for (i = 0; i < len; i++)
+        {
+            string text = Models.Element.options[i];
+            <label for="@i">@text</label>
+            <input type="radio" id="@i" name="element.labelIdx" value="@i" />
+            <br />
+        }
+    }
+
+    <br />
+    <br />
+    <p>Which medallions does the shrine have?</p>
+    @{
+        len = Models.Medallion.options.Length;
+        i = 0;
+        for (i = 0; i < len; i++)
+        {
+            string text = Models.Medallion.options[i];
+            <label for="@i">@text</label>
+            <input type="checkbox" id="@i" name="checkedBoxes" value="@i" />
+            <br />
+        }
+    }
+    <br/>
+    <input type="submit" value="Create" />
+
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
